@@ -1,0 +1,115 @@
+﻿html body {
+    width:100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial,'Microsoft YaHei';
+    /*background-color: #b1b1b1;*/
+    -moz-user-select: none; /*火狐*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -ms-user-select: none; /*IE10*/
+    -khtml-user-select: none; /*早期浏览器*/
+    user-select: none;
+    overflow: hidden;
+}
+ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.mask {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: rgba(0,0,0,.5);
+}
+.user-role-selector {
+    width: 740px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -290px;
+    margin-top: -250px;
+    background-color: #fff;
+    border-radius: 2px; /*边角半怪*/
+    padding: 30px 20px;
+}
+
+    .user-role-selector .row {
+        height:30px;
+    }
+
+.user-role-selector .data-list {
+    width: 40%;
+    height: 90%;
+    /*overflow-y:auto; 
+    overflow-x:auto; */
+    overflow:auto;
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    float: left;
+}
+.user-role-selector .data-list li {
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+    text-indent: 10px;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.user-role-selector .data-list li:hover {
+    background-color: #039ae3;
+    color: #fff;
+}
+.user-role-selector .data-list li.selected {
+    background-color: #666;
+    color: #fff;
+}
+.user-role-selector .data-oper {
+    width: 18%;
+    height: 65%;
+    float: left;
+    padding-top: 25%;
+}
+.user-role-selector .data-oper .button {
+    margin: 20px auto;
+    text-align: center;
+}
+.user-role-selector .button {
+    width: 80px;
+    height: 36px;
+    display: block;
+    border: 1px solid #d9d9d9;
+    line-height: 36px;
+    text-decoration: none;
+    color: #333;
+    background: #f3f3f3;
+    font-size: 14px;
+}
+.user-role-selector .button:hover {
+    background-color: #039ae3;
+    color: #fff;
+} 
+.user-role-selector .data-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    height: 10%;
+}
+    .user-role-selector .data-bar .button {
+        float:right;
+        text-align:center;
+        margin-right:25px;
+    }
+    .user-role-selector .data-bar .close {
+        background-color: #e84c4c;
+        color: #fff;
+    }

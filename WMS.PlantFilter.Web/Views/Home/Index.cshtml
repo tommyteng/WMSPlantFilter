@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "配置工厂映射关系";
+}
+@section csss{
+    <link href="~/Content/assets/UserRoleSelector/css/UserRoleSelector.css" rel="stylesheet" />
+}
+<div class="jumbotron" style="text-align:center; padding-top:100px">
+    <button id="showSelector">配置工厂映射关系</button>
+</div>
+
+@section scripts{
+    <script src="~/Content/assets/UserRoleSelector/js/UserRoleSelector.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var rootUrl="@Url.Content("~")";//获取根路径，防止iis部署位置不同
+            var data = function () {
+                var dataResult;
+                $.ajax({
+                    async: false,
+                    cache: false,
+                    timeout: 2 * 60 * 1000,
+                    data: "name=" + encodeURI(name),
+                    type: "GET",
+                    datatype: "JSON",
+                    url: rootUrl+ "Home/GetRelPlants",
+                    success: function (result) {
+                        if (result.Code == "0") {
+                            dataResult = result.Data;
+                        }
+                    },
+                    error: function (result) {
+
+                    },
+                })
+                return dataResult;
+            }
+            document.getElementById("showSelector").onclick = function () {
+                var dataList = data();
+                if (dataList == null) {
+                    alert("thrift服务没正常启动！");
+                    return;
+                }
+
+                var selector = new UserRoleSelector({
+                    show: false,//默认不显示
+                    data: dataList.Left,
+                    rightdata: dataList.Right,
+                    onsave: function (selector) {
+                        var obj = this;
+                        $.ajax({
+                            async: true,
+                            cache: false,
+                            timeout: 2 * 60 * 1000,
+                            data: { "data": this.getValues() },
+                            type: "POST",
+                            datatype: "JSON",
+                            url: rootUrl + "Home/SaveRelPlants",
+                            success: function (result) {
+                                if (result.Code == "0") {
+                                    obj.hide();
+                                    data();
+                                    alert("保存成功\r\n");
+                                } else {
+                                    alert("保存失败\r\n");
+                                }
+                            },
+                            error: function (result) {
+                                alert("保存失败\r\n");
+                            },
+                        })
+                    },
+                });
+
+                if (selector.status) {
+                    selector.hide();
+                }
+                else {
+                    selector.show();
+                }
+            }
+        });
+</script>
+}
